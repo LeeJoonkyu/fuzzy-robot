@@ -3,3 +3,18 @@ client와 server. request와 response
 
 #web application 이해.
 pip 설치 및 python manage.py runserver
+
+**장고
+13.123.123.123 이라는 서버에
+13.123.123.123/whatsnew
+라면 그 서버에 whatsnew라는 경로로 연결해달라고 요청하는 것.
+ip주소((서버) 컴퓨터)/search라는 함수에 다음과 같은 내용을 input해라 (Wdfkwel23$#$% 장고 = ) 이런식으로.
+순서 0. setting.py installed_apps에 'core'추가.
+그러면 core밑에 migration아래에 views부터 여러가지 py파일 생성됨.
+순서 1. python manage.py runserver
+순서 2. views.py에 def home(request):
+return render(request, 'home.html')
+리퀘스트 함수 이름 home으로, render함수사용.
+순서 3.  template에 home html 생성. 첫번째 렌딩 페이지 입니다.
+순서 4. 마지막으로 urls.py에 path('home/',views.home)를 만든다 의미는  home/ 이라는 리퀘스트를 보냇을때 views.home을 실행한다는 것.
+
