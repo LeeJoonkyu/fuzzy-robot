@@ -124,4 +124,5 @@ git remote show origin 은 연결상태를 확인 해주는 커맨드.
 어떻게 연결을 하냐? 로컬에 원격 브랜치와 똑같은 브랜치 이름으로 브랜치 생성하면
 자동연결. 원격 브랜치 상태 보려면 git remote show origin 하면 된다.
 
-
+#기타 명령어 
+git branch -r : git branch와 다르게 remote의 브랜치들을 보여주는 것.
