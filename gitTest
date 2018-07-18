@@ -5,7 +5,7 @@ ls -a
 touch test.txt
 ls
 
-git status -> no file
+git status -> no file, untracked file (파일의 상태변화를 추적하지 않아.)
 
 clear
 
@@ -16,3 +16,23 @@ git status -> new file: test.txt
 
 파일 내용 수정 후
 git status -> modified: test.txt
+
+
+만들고 git add : 관리대상으로 지정.
+처음에 마지막으로 찍은 게 남아있지.
+
+수정됏으면 수정된 상태를 찍어야지.
+modified   
+파일을 수정하고 git add 하면 
+modified는 사라지고 이제 최신화 됨.
+
+아직 앨범에 넣은 건 아니야
+앨범에 넣는 작업이 committed.
+modified - staged - committed
+stage는 add를 하면 되는 것.
+왜 staged를 하냐? commit은 꽤 신중한 작업이니까 그전에 다리를 두는 것.
+
+git commit -m "initial commit"
+
+수정작업 후 git add test.txt 하면 modified : test.txt로 뜨는게 맞나? ***
+git log 는 세이브 포인트로 저장. 시간들을 추적.
