@@ -1,0 +1,18 @@
+mkdir gitTest
+cd gitTest
+git init
+ls -a
+touch test.txt
+ls
+
+git status -> no file
+
+clear
+
+ls
+
+git add test.txt
+git status -> new file: test.txt
+
+파일 내용 수정 후
+git status -> modified: test.txt
