@@ -1,3 +1,4 @@
+#기본적인 명령어
 mkdir gitTest
 cd gitTest
 git init
@@ -34,5 +35,93 @@ stage는 add를 하면 되는 것.
 
 git commit -m "initial commit"
 
-수정작업 후 git add test.txt 하면 modified : test.txt로 뜨는게 맞나? ***
+수정작업 후 git add test.txt 하면 modified : test.txt로 뜨는게 맞나? *** : 빨 -> 초
 git log 는 세이브 포인트로 저장. 시간들을 추적.
+
+git add . 해당 디렉토리 모든 파일이 다 add됨
+
+#gitignore
+***그런데 캐시파일이나 이런 것들을 아예 add 되는 목록에서 제외 시킬 수 있다. ***
+gitignore.io에 들어간다음
+Djanngo를 create한 다음
+touch .gitignore
+vi .gitignore
+들어가서
+paste 후 esc누르면 --insert-- 사라짐. :wq 하면 (save and out)
+그다음 들어가서 저장사항 없으면 그냥 :q
+
+다시 처음부터.
+해보면 git commit -m 말고 git commit만 하면 vim 창이 나오고, 거기서 i 를 누르면 insert mode 진입
+initial commit 작성 후 :wq 하면 나와진다.
+
+#git cloning
+git clone http해당 주소
+cd redux~
+git log --stat
+git log -p
+들어가면 +가 추가된 줄
+그런데 log에서 보이는 파일이 많은데
+log -p해서 상태 변화 보여주는 거는 가장 최근의 커밋 파일 대상인건가?**
+
+#branch라는 건 
+버전 관리를 투트랙으로하겟다 3트랙으로 하겟다. 하는 것.
+나머지 가지를 하나 더 치겠다. 이런 것.
+마스터 브랜치 등등 
+branch 생성하는 건 git branch test
+생성된 브랜치로 옮기는 건 git checkout test
+그럼 master branch의 상태를 test로 복사해오고, (복사는 branch 명령어 사용시 바로된다)ㅇ
+test 브랜치가 맘에 들면 마스터로 합쳐서 가져오면 된다.
+
+하나의 파일에 두가지 버전이 있는 것.
+checkout 을 master test로 옮기면 new branch에 커밋한 것이 그 파일 변화가 new ver에 담겨있고
+master로 또 checkout 하면 원래의 파일이 기존 ver에 담겨있는 것. (소름)
+add때가 아니라 commit때 버전 관리가 되는 것.
+master 브랜치로 옮길땐 git master 만 써도된다
+
+git merge fast forward가 나오는 거는 update의 경우인데 conflict가 아니라.
+에러유도라인(마스터) 뉴브랜치(에러유도라인을 지우고 asdf로 고치고 커밋하면 그냥 update가 되어버림 fast forward로.
+근데 마스터 뉴브랜치 마스터로 와서 마스터를 수정한다음 머지하면 conflict가 난다. *** 중요.
+
+git log --graph는 옆에 그래프 표시됨. 브랜치
+git remote는 원격 서버를 보여준다. 
+origin이라 뜬다면 클로닝한 url을 보여준다.
+
+원격저장소 생성은 git remote add origin https://리포지토리 url
+git remote -v하면 잘 연결이 되었나 보여준다.
+
+#push : git push origin master (현재의 브랜치를 원격의 마스터 브랜치에 푸시)
+원격과 로컬을 항상 동기화 해줘야한다
+다르면 fetch해줘야함
+git fetch origin master
+근데 원격의 상태를 가져오기만 했을 뿐,
+로컬의 파일은 가져오기 전이랑 똑같애.
+그 가져온 보이지 않는 상태를 로컬 파일과 합쳐줘야지.
+git merge master/origin
+
+충돌나면
+<<<<<<< HEAD
+aslslsoa
+지금 원격이랑 상태가 다릅니다.
+=======
+?댁?洹??섏씠 ?섏젙?섏뀲?듬땲??
+aslslsoa
+>>>>>>> origin/master
+선택 후 git add commmit
+그런 다음 git push 하면 된다!
+
+#fetch merge 그리고 pull
+fetch 후 merge 하는 걸 한번에 하는 것이
+git pull origin master
+그럼 이제 원격과 로컬이 동기화가 된 것. pull로 버전을 맞춰주는 게 매우 중요.
+변경사항이 잇다면 add commit 후 푸쉬.
+git remote show origin 은 연결상태를 확인 해주는 커맨드.
+
+**fetch를 할 필요가 없는 게 좋다는데, pull하면 되는데 왜 fetch가 있어야하는 건가.**
+
+준우의 clone을 해오면,
+마스터 브랜치만 받아오고 , 나머지 브랜치를 받아오긴 했는데,
+연결이 안된 상태다. 이게 정상
+어떻게 연결을 하냐? 로컬에 원격 브랜치와 똑같은 브랜치 이름으로 브랜치 생성하면
+자동연결. 원격 브랜치 상태 보려면 git remote show origin 하면 된다.
+
+
