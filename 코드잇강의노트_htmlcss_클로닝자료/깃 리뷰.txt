@@ -1,0 +1,21 @@
+그냥 원격에 리포지토리만들고
+아무 클로닝 없이
+pull 하면 에러생긴다
+refusing unrelated histories 엿나.
+
+클로닝 하고,
+첫 애드 첫 커밋 첫 푸쉬
+그다음 pull하면 up to date 되어있다.
+
+지금까진 orgin master로 했는데,
+만약 newbranch 거를 원격 newbranch라던가
+원격 master로 보내는게 가능한가?
+아니, 
+마스터 브랜치는 마스터브랜치로가고
+뉴브랜치는 뉴브랜치로 간다.
+뉴브랜치꺼를 보내려면
+원격에 뉴브랜치를 생성해야.
+깃헙에서 뉴브랜치 생성한다음,
+내 뉴브랜치에 꺼를 
+git push origin newbranch
+하면 newbranch -> newbranch가 가능해진다.

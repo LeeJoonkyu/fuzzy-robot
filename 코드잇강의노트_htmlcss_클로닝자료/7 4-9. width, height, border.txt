@@ -1,0 +1,43 @@
+7 4- .
+
+#width와 height
+기본값은 width가 p태그의 내용이 그냥
+내용박스 전체를 먹게되는데,
+이를 조정해주려면 
+width와 height : 500px; 정도 주면 된다.
+**heigth:500px; 면 화면 늘렷을때 안따라와주고,(500px까지는 따라온다)
+그럼 이건 기본값이.. max min이랑은 무관. 그냥 500px이라고 알아두기.
+화면 줄이면 잘리지. 
+
+#min-width: 500px;이면 적어도 500px을 먹어야한다는 것.
+브라우저를 늘리면 500px을 최소로 먹으니까 끝까지 다먹는다 (조정이되어서 나온다.)
+줄이면 500px 아래로 떨어지면 화면에 맞춰서 조정이 안되고, 잘려서 나온다
+max-width는 그반대. 늘리더라도 500px로 고정되어서 나온다.
+줄이면 어떻게 될까 조정이 되어서 나오겟지. 반대니까. -->해보기
+
+min-height:는 하한. 상한이 없으니까 내용이 아무리 길어져도 맞춰서 나오는데
+max-hegith:는 상한이므로 내용이 길어지면 오버플로우가 발생하게 된다.
+
+#오버플로우의 처리
+overflow: hidden; 이면 삐져나온 내용을 인위적으로 숨겨버리는 것.
+아예 잘려버린다.
+다른 방법은 삐져나오게 놔두는 것.
+overflow: visible; (이게 기본값)
+overflow: scroll; 이면 스크롤을 내려서 볼수있다. 우리가 흔히 하듯이
+overflow: auto; 는 스크롤을 쓰면 내용이 적어도 항상 생기고,
+오토는 내용이 적으면 없고, 많으면 생기는. 편리한 방법.
+
+#테두리
+테두리는 border이 가장 보편적인 방법.
+solid : 일반 선 dotted : 점선 dashed: 파선(좀 굵은 점선)
+border-style: solid or dotted or dashed;
+border-color: #4d9fff;
+border-width: 5px ->이걸 한 줄 에 하는 것이 border: 2px solid #4d9fff;
+위아래왼쪽오른쪽이 같을 경우 한줄 처리,
+border-top: 3px dotted #4d9fff; border-bottom : 2px dashed red; 뭐 이런식으로 하는
+것이 전자의 방법.
+
+border: none; 
+border: 0;
+는 없애기.
+

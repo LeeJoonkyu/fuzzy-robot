@@ -1,0 +1,62 @@
+코드잇강의
+7. box model
+border -> padding -> 실제내용
+테두리와 내용이 딱 달라붙어있으면 답답할 수 있으니, 패딩이 존재.
+
+#마진은 간격.
+마진은 기본 값이 있어서 처음에 주는 값이 있는 데 이를 수정하고 싶으면
+border: 5px solid red;
+margin-top :100px;
+margin-bottom: 100px;
+margin-left: 50px; 같이 값을 수정해주면 된다.
+
+#다음 패딩을 넣어보자.
+박스와 글자가 원래는 딱 붙어있기마련인데,
+이를 띄워주고 싶다면,
+padding-top bottom left right를 주면 된다. 박스내용과 전체 박스사이에 간격을
+주는 것.
+가로길이는 100% 공간을 차지하고 세로는 높이 오토로 되어 있는데,
+이를 수정해주고 싶다면
+width: 500px;
+height: 300px; 이렇게 설정해주면 
+조정이 가능하다.
+
+#padding-top bottom left right는 
+한줄에 가능하다.
+시계방향으로. 위 오른쪽 아래 왼쪽.
+다 똑같다면 padding: 50px; 해주면된다.
+위아래만 같고 오른쪽왼쪽이 같다면
+padding: 50px 25px; 이런식.
+margin-top bottom left right도 똑같다.
+
+그런데 마진값 없는 상태에서(기본값만 있는 상태)
+border 5px; width: 500px; 
+주면 왼쪽으로 쏠린다.
+기본적으로 왼쪽 정렬 되어있기 때문.
+이걸 가운데 정렬하려면
+margin-left: auto;(브라우저에게 알아서 계산하라)
+margin-right: auto; 이거는 남은 공간을(border 바깥부터 브라우저 끝까지)
+반씩 잘라서 왼쪽 오른쪽에 나눠주라는 뜻. 
+만약 남은 공간이 없다면? 당연히 정렬이 안되겟지.
+
+만약 위아래로 마진이 0px, 왼쪽오른쪽 가운데정렬이라면
+margin: 0 auto;
+
+#직관적으로 박스모델 보면서 이해하기
+p {
+  border: 1px solid blue;
+  padding: 20px 60px 40px 120px;
+} ->패딩주기
+
+p {
+  border: 1px solid blue;
+  margin: 50px 60px 40px 200px;
+} ->마진주기
+
+p {
+  border: 1px solid blue;
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+

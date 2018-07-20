@@ -1,0 +1,68 @@
+#박스 꾸미기
+border-radius: 50px;
+border-top-left radius:
+border-bottom-right radius:
+로 개별설정도 가능
+
+background-color: red;
+배경색 투명하게 하기
+background-color: transparent; 이것이 기본값.
+
+div 박스와 배경색이 같아지게 만들려면 div 박스의 bck-color을 transparent해주면된다
+
+box-shadow: 10px 10px; 가로(오른쪽) 세로(아래쪽) 각각.
+-30px를 주면 위로가겟지 세로 -> 위쪽
+50px -30px 50px 10px 하면 세번째것은 그림자를 어느정도 강도로 흐리게 하는 것인지
+네번째 것은 그림자의 크기. -10px는 더 작아지고. 즉 퍼지는 정도를 알려주는 것.
+
+#박스 사이징
+h1{
+width: 300px;
+hegith: 200px;
+padding:35px;
+border: 5px solid red;
+}
+하면 박스가 커져. 왜? 가로 세로는 300 200(순수 내용물)
+근데 박스와 내용물 사이의 패딩이 35 35 씩잇으니까 왼쪽오른쪽으로 70추가. 보더5 5
+추가니까 380으로 늘어난거지 가로가.
+늘 주의해야 될것이 박스의 끝은 border라는 것.
+내용물이 아니야.
+
+근데 박스 전체가 300px 200px이길 바란다면,
+width 220px; hegith 120px; 로 80씩 빼줘야겟지.
+
+너무 귀찮지?
+가로 세로를 설정했을때 딱 맞춰서 나오게 하고 싶다면.
+패딩을넣어도, 보더를 넣어도 300 200으로 딱 나오게 하려면
+box-sizing: border-box;
+딱 우리가 원하는 대로 패딩과 테두리가 가로길이와 세로길이 (300 200)에
+포함되게 되는 것.
+기본값은
+box-sizing: content-box; 
+이게 기본값이니까 300 200 이 내용물 사이즈로 들어가게 되버림.
+요새는
+*{
+box-sizing: border-box;
+}로 먹여주는 추세. 모든 요소에 박스사이징을 하는 것.
+
+#배경이미지
+.div1{
+height: 500px;
+border: 5px solid green;
+
+background-image: url("../images/beach.jpg");
+background-repeat: no-repeat;
+사이즈조정
+background-size: 200px 50px;
+div에 꽉채우려면,
+background-size: 100% 500px;
+그럼 사진이 늘리거나 줄일때 찌그러진다.
+background-size: cover;
+를 하게되면 아무리 늘였다 줄여도, 이미지는 div를 꽉채우고 원래비율을 유지한다.
+근데 잘리는 부분이 생길 수 잇어. 줄이면 잘리고 늘리면 잘리고.
+background-position: right bottom; 
+(오른쪽으로 치우쳐서 왼쪽이 잘리게끔, 세로로 잘리게 되는 상황이 오면 위가 잘리도록
+cf) center center 면 가운데 정렬되어서 잘림.
+
+늘리거나 줄여도 비율이 유지되려면? 
+아마도 background-size: auto; 이건 원래 이미지 사이즈에 충실하게 나오는 거고..

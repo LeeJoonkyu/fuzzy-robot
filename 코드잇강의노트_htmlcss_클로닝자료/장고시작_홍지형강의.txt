@@ -1,0 +1,211 @@
+**장고
+13.123.123.123 이라는 서버에
+13.123.123.123/whatsnew
+라면 그 서버에 whatsnew라는 경로로 연결해달라고 요청하는 것.
+ip주소((서버) 컴퓨터)/search라는 함수에 다음과 같은 내용을 input해라 (Wdfkwel23$#$% 장고 = ) 이런식으로.
+
+순서 00. python manage.py startapp core 커맨드 라인.
+그러면 core밑에 migration아래에 views부터 여러가지 py파일 생성됨.
+
+순서 0. setting.py installed_apps에 'core'추가. (리스트 멤버로)
+순서 1. python manage.py runserver 커맨드 라인
+순서 2. views.py에 def home(request):
+return render(request, 'home.html')
+
+리퀘스트 함수 이름 home으로, render함수사용.
+순서 3.  template에 home html 생성. 첫번째 렌딩 페이지 입니다.
+순서 4. 마지막으로 urls.py에 
+from core import views 
+path('home/',views.home)를 만든다 의미는  home/ 이라는 리퀘스트를 보냇을때 
+views.home을 실행한다는 것.
+
+**장고는 모델 뷰 템플릿이 중요해
+모델이라는 거는 데이터베이스를 어떻게 처리 - 모델
+리퀘스트에서 데이터가 넘어오면 그걸 어떻게 처리 - 뷰
+모델과 뷰가 주로 서버 작업이고
+템플릿은 주로 클라이언트쪽 작업.
+라이브 코딩 순서를 잘 볼 것.
+
+http 통신 방식에 대해.
+server <-> client
+클라이언트가 리퀘스트
+서버가 리스폰스
+
+GET(URL 입력이 대표적)요청
+POST PUT DELETE
+
+1. python manage.py startapp articles (이 서버에 앱을 하나 만든 것.)
+사용자가 url을 입력을 했을 때 그 url을 받아서 어떻게 처리해줄 것이냐.
+대문자주의 models.Model
+
+
+2. models.py에 생성시간, 캐릭터필드 등 입력
+
+3. settings.py에 python manage.py makemigrations (
+makemigration이라는 거는 우리가 어떤 양식의 데이터를 디비에 집어넣겟다 
+는 양식을 만든 것.
+
+4. 다음 커맨드는 python managepy migrate
+서버 돌리는 커맨드 창 하나, 따라 치는 커맨드 창 하나. 두개 해두면 편하다
+
+5. 다음 커맨드는 python manage.py createsuperuser
+admin.py 들어가서
+from django.contrib import admin
+from .models import Article
+# Register your models here.
+
+admin.site.register(Article)
+이제 db에 글을 쓴 것이고 처음 home 페이지에 뭔가를 띄우려면 
+작업을 더 해줘야한다.
+m,v,t 중 m을 만들었고 
+v,t를 만들 것. views.py로 가자.
+
+6.
+from django.shortcuts import render
+from .models import Article
+# Create your views here.
+# 뷰함수를 만들땐 리퀘스트를 먼저 인자로 받아야해
+def detail_article(request):
+    print(request.method) #리퀘스트가 겟인지 포스트인지 확인하기 위한 라인. 
+그다음 urls.py로 가자.
+
+7.
+from django.contrib import admin
+from django.urls import path #이 두라인은 import... 에서 ...을 누르면 생기더라;
+from articles import views
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('post/', views.detail_article),
+    
+] 
+
+이게 post/라는 url에 맵핑시키는 작업. 리퀘스트를.
+이때 /post/ url쳐보면 valueerror가 뜨는데 이거는 아직 views.py에서
+리턴을 안해서 생기는 문제.
+이제 뷰와 url을 연결하였다.
+템플릿을 건드려보자.
+
+8. setting.py에 template리스트를 보자.
+템플릿 경로를 인식하게끔.
+dir 사전에 [os.path.join(BASE_DIR,'static','templates')]추가.
+그리고 static 폴더 생성. 하위에 templates폴더 생성.
+articles 아래에도 templates.폴더 생성.
+그 하위에 이제 보이는 페이지를 보여줘야 하기 때문에
+detail.html 파일 생성.
+views.py들어가서 프린트라인 지우고
+입력시작.
+    article = Article.objects.first() 
+    #쿼리셋 함수라는 건데 우리가 만든 db에 저장된 Article을 불러온 것 그중 첫번째를
+    #models.py에 있는 Article이라는 함수.
+    #ctx라는 사전 변수 선언.
+    ctx={
+        'article' : article #윗라인에서 가져온 데이터지. article은 Article을 담은 것
+    }
+    return render(request, 'detail.html', ctx) #detail.html을 렌더해서, 같이 넘겨줄 데이터까지
+   # 돌려줘라.
+
+9. 그 받아온 article을 detail.html에 들어가서
+body에 {{ article }} 중괄호 두개로 묶어줘서.
+왜 소문자냐. 이거는 ctx라는 사전의 key값 지정을 article로 해줬기 때문.
+이제 다시 body에
+<div>{{ article.title }}</div>
+<div>{{ article.content }}</div>
+<div>{{ article.created_at }}</div>
+<div>{{ article.updated_at }}</div>
+추가. 이러면 article을 했을 때, Article 클래스의 첫줄을 article에 받아왔고
+해당 자료를 'article' 키값에 넣어뒀지.
+article.~ 하는 순간 article에서 밸류값이 넘어온다.
+거기서 title, content, created_at
+
+10. 
+base.html을 만든다.-> 쓰는 이유: 공통된 내용을 여러페이지에 담고싶을때
+작성한 후 다른 페이지에서 extend하면 된다.
+detail.html 수정하기
+{% extends 'base.html' %}
+
+{% block content %} #내장된 템플릿 언어를 쓰겠다는 것.
+<div>{{ article.title }}</div>
+<div>{{ article.content }}</div>
+<div>{{ article.created_at }}</div>
+<div>{{ article.updated_at }}</div>
+{% endblock %}
+
+detail.html을 렌더링 한 건데,
+base.html내용이 왔다
+이것은 extend의 영향
+block content와 endblock 은 한 쌍.
+
+11. 이제, 부트스트랩(bootstrap)이라는 css 프레임워크를 통해
+디자인을 해볼 것.
+홈페이지 -> 다큐멘테이션 ->css, js 링크 네줄을 base.html 헤드에 복사
+컴포넌트 -> navbar -> 브랜드에서 as a link 한줄. 헤더에 복사.
+<nav class="navbar navbar-light bg-light">
+      <a class="navbar-brand" href="#">피로그래밍</a>
+    </nav>
+이렇게.
+
+12. cmd창.
+python manage.py shell
+'이 서버'에서 파이썬을 실행시킨 것.
+그냥 파이썬 하는 거랑 똑같진 않아.
+이 서버에서 이제 각종 모델을 부를 수 있다는 게 차이지.
+from articles.models. import Article
+게시글 여러개 만들기
+for i in range(10):
+	Article.objects.create(title="test{0}".format(i), content="this is test{0}.format(i))
+
+13. url 수정
+<int:pk>/ 바꾸기
+url을 pk로 바꾼것의 뜻은 url로 int 형식의 pk를 받아오겠다.
+url 뒤에 숫자가 오면 pk변수에 넣겟다는 것.
+뷰 수정
+def detail_article(request, pk): 
+    article = Article.objects.get(pk=pk) 넘어온 인자값과 같은 pk값을 가지는 
+아티클 오브젝트를 가져오겠다.
+아까 만들어놨던 게시글에서
+1, 2, 3 등의 인트값이 가잇을테니
+거기에 맞춰 입력하면 된다.
+
+14. 마지막 과정. 
+view수정 하기
+def list_article(request):
+    articles = Article.objects.all()
+    ctx = {
+        'articles' : articles
+        
+    }
+    return render(request, 'list.html',ctx)
+templates 폴더에 list.html 만들고, urls에 url 파기 두개를 해야해***
+
+부트스트랩에서 컨텐트 테이블 들어가서 복사해오기.
+list.html에,
+{% extends 'base.html' %}
+
+{% block content %}
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">title</th>
+      <th scope="col">created_at</th>
+      <th scope="col">updated_at</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    {% for article in articles %}
+    <tr>
+      <th scope="row">{{ article.pk }}</th>
+      <td>{{ article.title }}</td>
+      <td>{{ article.created_at }}</td>
+      <td>{{ article.updated_at }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+  </table>
+
+
+{% endblock %}
+
+	
