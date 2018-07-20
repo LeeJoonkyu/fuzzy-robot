@@ -88,6 +88,7 @@ origin이라 뜬다면 클로닝한 url을 보여준다.
 
 원격저장소 생성은 git remote add origin https://리포지토리 url
 git remote -v하면 잘 연결이 되었나 보여준다.
+여기서 origin이란 https 즉 원격
 
 #push : git push origin master (현재의 브랜치를 원격의 마스터 브랜치에 푸시)
 원격과 로컬을 항상 동기화 해줘야한다
