@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col s12 l10 offset-l1">
+        <!-- 본문 영역 -->
+        <div style="padding: 80px 0 30px 0; margin-bottom: 50px;">
+            <h2 style="text-align: center; color: #565656;">{{ article.title }}</h2>
+            <div style="text-align: right;
+                        margin-top: 30px;
+                        margin-right: 10px;
+                        font-size: 12px;">
+                <span>{{ article.created_at|date:"Y.m.d h:i A" }}</span><br />
+            </div>
+        </div>
+        <div style="font-size: 13px; line-height: 18px; color: #565656;">
+            <p>{{ article.content }}</p>
+        </div>
+{#        <div id="tag_area" style="margin: 20px 0;">#}
+{#            {% for tag in article.tag.all %}#}
+{#            <div class="chip">{{ tag.name }}</div>#}
+{#            {% endfor %}#}
+{#        </div>#}
+{#        <div id="like_button_wrapper">#}
+{#            <a id="like_button" href="{% url 'core:article_like' article.pk %}">#}
+{#                {% include 'core/article_like_button.html' %}#}
+{#            </a>#}
+{#            <script>#}
+{#                $('#like_button').click(function(e) {#}
+{#                    var self = $(this);#}
+{#                    var url = self.attr('href');#}
+{##}
+{#                    $.post(url)#}
+{#                        .done(function(r) {#}
+{#                            self.html(r);#}
+{#                        })#}
+{#                        .fail(function() {#}
+{#                            alert('오류가 발생했습니다. 다시 해보세요.');#}
+{#                        });#}
+{##}
+{#                    return false;#}
+{#                });#}
+{#            </script>#}
+{#        </div>#}
+{% endblock %}

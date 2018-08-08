@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>piro 라이브코딩</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link href="{% static 'css/core.css' %}" rel="stylesheet" type="text/css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <script src="{% static 'js/ajax_settings.js' %}"></script>
+
+</head>
+<body>
+    <header>
+
+        <nav>
+          <div class="nav-wrapper">
+            <a href="/" class="brand-logo" style="margin-left: 10px;">피로그래밍</a>
+            <ul class="right hide-on-med-and-down">
+                {% if request.user.is_authenticated %}
+                <li>
+                    <a class="dropdown-button" href="#!" data-activates="dropdown_for_login_user">{{ request.user }}<i class="material-icons right">arrow_drop_down</i></a>
+
+                    <ul id="dropdown_for_login_user" class="dropdown-content">
+{#                        <li><a href="{% url 'accounts:profile_detail' request.user.username %}">프로필 보기</a></li>#}
+{#                        <li><a href="{% url 'accounts:logout' %}">Log out..</a></li>#}
+                    </ul>
+
+                </li>
+                {% else %}
+{#                <li><a href="{% url 'accounts:signup' %}">회원가입</a></li>#}
+{#                <li><a href="{% url 'accounts:login' %}">로그인</a></li>#}
+                {% endif %}
+            </ul>
+            <ul id="slide-out" class="side-nav">
+                {% if request.user.is_authenticated %}
+{#                <li>#}
+{#                    <div class="user-view">#}
+{#                        <div class="background"></div>#}
+{#                        <a href="#!user"><img class="circle" src="{{ request.user.profile.image_url }}"></a>#}
+{#                        <a href="#!name"><span class="white-text name">{{ request.user }}</span></a>#}
+{#                        <a href="#!email"><span class="white-text email">{{ request.user.email }}</span></a>#}
+{#                    </div>#}
+{#                </li>#}
+{#                <li><a href="{% url 'accounts:profile_detail' request.user.username %}">프로필 보기</a></li>#}
+{#                <li><a href="{% url 'accounts:logout' %}">Log out..</a></li>#}
+{#                {% else %}#}
+{#                <li><a href="{% url 'accounts:login' %}">로그인</a></li>#}
+{#                <li><a href="{% url 'accounts:signup' %}">회원가입</a></li>#}
+                {% endif %}
+            </ul>
+            <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+            <script>
+                $(".button-collapse").sideNav();
+            </script>
+          </div>
+        </nav>
+
+    </header>
+
+    <main class="container" style="margin: 50px auto;">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="page-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">피로's 블로그</h5>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="container">
+        Copyright 2018. 손준혁, All rights reserved.
+        <a class="grey-text text-lighten-4 right" href="https://github.com/happysmileboy/" target="_blank">준혁 GitHub</a>
+        </div>
+      </div>
+    </footer>
+</body>
+</html>
